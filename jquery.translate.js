@@ -72,14 +72,32 @@
         trn_key = $this.html();
         $this.attr("data-trn-key", trn_key);   //store key for next time
       }
+  
+      var trn_value = $this.attr("data-trn-value"); // Translate attribute value="" text
+      if (!trn_value) {
+        trn_value = $this.val();
+        $this.attr("data-trn-value", trn_value);   //store key for next time
+      }
+      
+      var trn_holder = $this.attr("data-trn-holder"); // Translate attribute placeholder="" text
+      if (!trn_holder) {
+        trn_holder = $(this).data("placeholder");
+        $this.attr("data-trn-holder", trn_holder);   //store key for next time
+      }
 
-      $this.html(that.get(trn_key));
+      var trn_title = $this.attr("data-trn-title"); // Translate attribute title="" text
+      if (!trn_title) {
+        trn_title = $(this).data("title");
+        $this.attr("data-trn-title", trn_title);   //store key for next time
+      }  
+      
+      $this.html(that.get(trn_key)); // plain text html
+      $this.val(that.get(trn_value)); // value text
+      $(this).attr("placeholder", that.get(trn_holder)); // placeholder text
+      $(this).attr("title", that.get(trn_title)); // title text
     });
-    
-    
-		return this;
-		
-		
-
+        
+	return this;
+	
   };
 })(jQuery);
