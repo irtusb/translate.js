@@ -18,22 +18,20 @@
         var that = this; //a reference to ourselves
 
         var settings = {
-            css: "trn",
-            attrs: ["alt", "placeholder", "title", "value"],
-            checkImage: true, // Checking images
+            css: ".trn", // selector
+            attrs: ["alt", "placeholder", "title"], // atributos a traducir
+            checkImage: false, // Checking images
             lang: "pt",
-            langDefault: "pt"/*,
+            langDefault: "pt",
+            /*
             t: {
-                "translate": {
-                    pt: "tradução",
-                    br: "tradução"
-                }
+               "translate": {
+                   pt: "tradução",
+                   br: "tradução",
+               },
             }*/
         };
         settings = $.extend(settings, options || {});
-        if (settings.css.lastIndexOf(".", 0) !== 0) { //doesn't start with '.'
-            settings.css = "." + settings.css; 
-        }
 
         var t = settings.t;
 
@@ -71,6 +69,7 @@
 
             var trn_key = $this.attr("data-trn-key");
             if (!trn_key) {
+                // si no tiene key, usar el innerHTML
                 trn_key = $this.html();
                 $this.attr("data-trn-key", trn_key);
             }
@@ -78,11 +77,14 @@
             // Filtering attr
             $.each(this.attributes, function() {
                 if ($.inArray(this.name, settings.attrs) !== -1) {
+                    // es un atributo traducible
                     var trn_attr_key = $this.attr("data-trn-attr");
                     if (!trn_attr_key) {
+                        // si no tiene key que sea el name
                         trn_attr_key = $this.attr(this.name);
                         $this.attr("data-trn-attr", trn_attr_key);
                     }
+                    // si tiene más de un atributo traducible quedan todos con el mismo texto
                     $this.attr(this.name, that.get(trn_attr_key));
                 }
             });
@@ -97,6 +99,7 @@
                         $this.attr("data-trn-img", trn_img_key);
                     }
                     if(settings.lang !== settings.langDefault){
+                        // esto está muuy raro
                         var new_src = trn_img_key.split(".");
                         trn_img_key = new_src[0] + "-" + settings.lang + "." + new_src[1];
                     }
