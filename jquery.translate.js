@@ -20,7 +20,7 @@
         var settings = {
             css: ".trn", // selector
             attrs: ["alt", "placeholder", "title"], // atributos a traducir
-            checkImage: false, // Checking images
+            //checkImage: false, // Checking images
             lang: "pt",
             langDefault: "pt",
             /*
@@ -67,11 +67,11 @@
         this.find(settings.css).each(function(i) {
             var $this = $(this);
 
-            var trn_key = $this.attr("data-trn-key");
+            var trn_key = $this.attr("data-trn");
             if (!trn_key) {
                 // si no tiene key, usar el innerHTML
                 trn_key = $this.html();
-                $this.attr("data-trn-key", trn_key);
+                $this.attr("data-trn", trn_key);
             }
 
             // Filtering attr
@@ -90,6 +90,7 @@
             });
 
             // images
+            /*
             if(settings.checkImage){
                 if($this.is('img')){
                     var trn_img_key = $this.attr("data-trn-img");
@@ -106,6 +107,7 @@
                     $this.attr('src', trn_img_key);
                 }
             }
+            */
 
             $this.html(that.get(trn_key));
         });
