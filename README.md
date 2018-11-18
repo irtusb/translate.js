@@ -39,7 +39,7 @@ Step 5: change to another language
     translator.lang("pt"); //change to Portuguese
 
 ## Optional
-Mark translatable elements with `data-trn-key` to use a custom key instead of whole innerHTML.
+Mark translatable elements with `data-trn` to use a custom key instead of whole innerHTML.
 
 ## License
 You may use translate.js under the terms of the MIT License. [More information](http://en.wikipedia.org/wiki/MIT_License).
